@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "example.myapp.inventory.grpc";
+option java_outer_classname = "InventoryRecord";
+
+package inventory;
+
+message InventoryRequest {
+    string id = 1;
+}
+
+message InventoryReply {
+    string inventoryId = 1;
+    string name = 2;
+    string description = 3;
+    int32 unitPrice = 4;
+    int32 quantityInStock = 5;
+    float inventoryValue = 6;
+    int32 reorderLevel = 7;
+    int32 reorderTime = 8;
+    int32 quantityInReorder = 9;
+    bool discontinued = 10;
+}
+
+service InventoryService {
+    rpc searchByID(InventoryRequest) returns (InventoryReply);
+}
