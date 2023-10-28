@@ -119,7 +119,7 @@ function update(call, callback) {
 }
 
 server.bindAsync(
-  "127.0.0.1:50000",
+  "127.0.0.1:80",
   grpc.ServerCredentials.createInsecure(),
   (error, port) => {
     server.start();

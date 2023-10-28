@@ -7,22 +7,26 @@ const inventoryPackage = grpcObject.inventory;
 const text = process.argv[2];
 
 const client = new inventoryPackage.InventoryService(
-  "localhost:50000",
+  // "http://3.88.251.218:3100:50000/",
+
+  // "http://ec2-3-88-251-218.compute-1.amazonaws.com/",
+  // "http://grpc-kxsb.onrender.com/",
+  "localhost:80",
   grpc.credentials.createInsecure()
 );
 
-// client.searchByID(
-//   {
-//     id: "IN0024",
-//   },
-//   (err, response) => {
-//     if (err) {
-//       console.log("Inventory " + err.details);
-//     } else {
-//       console.log("Inventory has been read " + JSON.stringify(response));
-//     }
-//   }
-// );
+client.searchByID(
+  {
+    id: "IN0024",
+  },
+  (err, response) => {
+    if (err) {
+      console.log("Inventory " + err.details);
+    } else {
+      console.log("Inventory has been read " + JSON.stringify(response));
+    }
+  }
+);
 
 // client.search({ key: "name", value: "Item " }, (err, response) => {
 //   if (err) {
@@ -54,18 +58,18 @@ const client = new inventoryPackage.InventoryService(
 //   }
 // );
 
-client.update(
-  {
-    key: "name",
-    value: "Item 24",
-    updateKey: "quantityInStock",
-    updateValue: "25",
-  },
-  (err, response) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Update response : ", JSON.stringify(response));
-    }
-  }
-);
+// client.update(
+//   {
+//     key: "name",
+//     value: "Item 24",
+//     updateKey: "quantityInStock",
+//     updateValue: "25",
+//   },
+//   (err, response) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log("Update response : ", JSON.stringify(response));
+//     }
+//   }
+// );
