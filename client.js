@@ -7,11 +7,11 @@ const inventoryPackage = grpcObject.inventory;
 const text = process.argv[2];
 
 const client = new inventoryPackage.InventoryService(
-  // "http://3.88.251.218:3100:50000/",
+  // "http://3.88.251.218:3100:80",
 
-  // "http://ec2-3-88-251-218.compute-1.amazonaws.com/",
+  "http://ec2-3-88-251-218.compute-1.amazonaws.com/:80",
   // "http://grpc-kxsb.onrender.com/",
-  "localhost:80",
+  // "localhost:50000",
   grpc.credentials.createInsecure()
 );
 
