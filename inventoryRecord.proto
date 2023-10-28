@@ -6,23 +6,57 @@ option java_outer_classname = "InventoryRecord";
 
 package inventory;
 
-message InventoryRequest {
+message searchId {
     string id = 1;
 }
 
+message searchKeyValue {
+    string key = 1;
+    string value = 2;
+}
+
+message searchRange {
+    string key = 1;
+    string valueStart = 2;
+    string valueEnd = 3;
+}
+
+message distributionRequest {
+    string key = 1;
+    double percentile = 2;
+}
+
+message distributionReply {
+    double percentile = 1;
+}
+message updateRequest {
+    string key = 1;
+    string value = 2;
+    string updateKey = 3;
+    string updateValue = 4;
+}
+message updateReply {
+    bool updated = 1;
+}
 message InventoryReply {
     string inventoryId = 1;
     string name = 2;
     string description = 3;
-    int32 unitPrice = 4;
-    int32 quantityInStock = 5;
-    float inventoryValue = 6;
-    int32 reorderLevel = 7;
-    int32 reorderTime = 8;
-    int32 quantityInReorder = 9;
+    double unitPrice = 4;
+    double quantityInStock = 5;
+    double inventoryValue = 6;
+    double reorderLevel = 7;
+    string reorderTime = 8;
+    string quantityInReorder = 9;
     bool discontinued = 10;
 }
-
+message InventoriesReply {
+    repeated InventoryReply inventories = 1;
+}
 service InventoryService {
-    rpc searchByID(InventoryRequest) returns (InventoryReply);
+    rpc searchByID(searchId) returns (InventoryReply);
+    rpc search(searchKeyValue) returns (InventoryReply);
+    rpc searchByRange(searchRange) returns (InventoriesReply);
+    rpc getDistribution(distributionRequest) returns (distributionReply);
+    rpc update(updateRequest) returns (updateReply);
 }

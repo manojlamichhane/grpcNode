@@ -11,47 +11,61 @@ const client = new inventoryPackage.InventoryService(
   grpc.credentials.createInsecure()
 );
 
-// client.createBook(
+// client.searchByID(
 //   {
-//     title: "title 3",
-//     author: "Herod 3",
-//     content: "Content 3",
+//     id: "IN0024",
 //   },
 //   (err, response) => {
-//     console.log("Book has been created " + JSON.stringify(response));
+//     if (err) {
+//       console.log("Inventory " + err.details);
+//     } else {
+//       console.log("Inventory has been read " + JSON.stringify(response));
+//     }
 //   }
 // );
 
-client.searchByID(
+// client.search({ key: "name", value: "Item " }, (err, response) => {
+//   if (err) {
+//     console.log("Inventory " + err.details);
+//   } else {
+//     console.log("Inventory has been read " + JSON.stringify(response));
+//   }
+// });
+
+// client.searchByRange(
+//   { key: "unitPrice", valueStart: "50", valueEnd: "60.00" },
+//   (err, response) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log("Inventory has been read " + JSON.stringify(response));
+//     }
+//   }
+// );
+
+// client.getDistribution(
+//   { key: "unitPrice", percentile: 40.0 },
+//   (err, response) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log("Percentile response " + JSON.stringify(response));
+//     }
+//   }
+// );
+
+client.update(
   {
-    id: "IN0003",
+    key: "name",
+    value: "Item 24",
+    updateKey: "quantityInStock",
+    updateValue: "25",
   },
   (err, response) => {
-    console.log("Book has been read " + JSON.stringify(response));
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Update response : ", JSON.stringify(response));
+    }
   }
 );
-
-// client.updateBook(
-//   {
-//     id: 2,
-//     title: "title 3",
-//     author: "Herod 3",
-//     content: "Content 3",
-//   },
-//   (err, response) => {
-//     console.log("Book has been updated " + JSON.stringify(response));
-//   }
-// );
-
-// client.deleteBook(
-//   {
-//     id: 2,
-//   },
-//   (err, response) => {
-//     console.log("Book has been deleted " + JSON.stringify(response));
-//   }
-// );
-
-// client.allBooks(null, (err, response) => {
-//   console.log("Read all books from database " + JSON.stringify(response));
-// });
