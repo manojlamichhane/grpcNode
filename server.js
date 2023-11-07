@@ -77,8 +77,8 @@ function searchByRange(call, callback) {
     callback(null, { inventories });
   } else {
     callback({
-      code: grpc.status.NOT_FOUND,
-      details: "Not found",
+      // code: grpc.status.NOT_FOUND,
+      // details: "Not found",
     });
   }
 }
@@ -94,8 +94,8 @@ function getDistribution(call, callback) {
     callback(null, { percentile });
   } else {
     callback({
-      code: grpc.status.INVALID_ARGUMENT,
-      details: "No result",
+      // code: grpc.status.INVALID_ARGUMENT,
+      // details: "No result",
     });
   }
 }
@@ -118,8 +118,10 @@ function update(call, callback) {
   }
 }
 
+const port = parseInt(process.env.PORT) || 50051;
+
 server.bindAsync(
-  "127.0.0.1:50000",
+  "127.0.0.1:" + port,
   grpc.ServerCredentials.createInsecure(),
   (error, port) => {
     server.start();
